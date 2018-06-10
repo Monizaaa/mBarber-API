@@ -10,5 +10,11 @@ namespace mBarber.Model
         {
             return null;
         }
+
+        public void InsertUser(UserModel userModel)
+        {
+            //_db.GetCollection<UserModel>("users").Save(userModel);
+            // return d;
+        }
     }
 }

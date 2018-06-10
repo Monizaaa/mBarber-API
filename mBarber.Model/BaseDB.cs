@@ -8,7 +8,7 @@ namespace mBarber.Model
     public class BaseDB
     {
         public MongoClient _client;
-        //public MongoDatabase _db;
+        public IMongoDatabase _db;
 
         private class mongoConfig
         {
@@ -24,9 +24,20 @@ namespace mBarber.Model
                 JObject json = (JObject)JToken.ReadFrom(reader);
 
                 var config = json.Property("mongodb").Value;
+                var mode = json.Property("mode").Value.ToString();
 
-                _client = new MongoClient("mongodb://localhost:27017");
-                //_db = _client.GetDatabase();
+                if (mode == "dev")
+                {
+                    var devModel = config["mode"];
+                    _client = new MongoClient("mongodb://localhost:27017");
+                    _db = _client.GetDatabase("");
+                }else if (mode == "product")
+                {
+                    _client = new MongoClient("mongodb://localhost:27017");
+                    _db = _client.GetDatabase("");
+                }
+
+                
             }
             
         }
