@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 
 namespace mBarber.Model
 {
@@ -11,10 +9,11 @@ namespace mBarber.Model
             return null;
         }
 
-        public void InsertUser(UserModel userModel)
+        public UserModel InsertUser(UserModel userModel)
         {
-            //_db.GetCollection<UserModel>("users").Save(userModel);
-            // return d;
+            _db.GetCollection<UserModel>("users").InsertOneAsync(userModel);
+
+            return userModel;
         }
     }
 }

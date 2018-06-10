@@ -28,6 +28,8 @@ namespace mBarber.API
                 app.UseDeveloperExceptionPage();
             }
 
+            AutoMapperConfig.InitializeMappers();
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -38,5 +40,11 @@ namespace mBarber.API
 
             app.UseMvc();
         }
+
+        public void StartUp()
+        {
+            
+        }
+
     }
 }

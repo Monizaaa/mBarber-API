@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using mBarber.Model;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace mBarber.API.Controllers
@@ -40,7 +36,13 @@ namespace mBarber.API.Controllers
             {
                 return BadRequest(ModelError());
             }
-            return Ok();
+
+            var userModel = Mapper.Map<UserModel>(request_model);
+
+            UserRepo rp = new UserRepo();
+            rp.InsertUser(userModel);
+
+            return Ok(new SignUpResponse { status = 200, message = "SUCCESS", data = request_model });
         }
         #endregion
 

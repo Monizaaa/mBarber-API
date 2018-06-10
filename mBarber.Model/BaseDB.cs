@@ -23,18 +23,20 @@ namespace mBarber.Model
             {
                 JObject json = (JObject)JToken.ReadFrom(reader);
 
-                var config = json.Property("mongodb").Value;
                 var mode = json.Property("mode").Value.ToString();
 
                 if (mode == "dev")
                 {
-                    var devModel = config["mode"];
-                    _client = new MongoClient("mongodb://localhost:27017");
-                    _db = _client.GetDatabase("");
-                }else if (mode == "product")
-                {
-                    _client = new MongoClient("mongodb://localhost:27017");
-                    _db = _client.GetDatabase("");
+                    var devUrl = json.SelectToken("mongodb.dev.url").ToString();
+                    var devDBName = json.SelectToken("mongodb.dev.db_name").ToString();
+                    _client = new MongoClient(devUrl);
+                    _db = _client.GetDatabase(devDBName);
+                }
+                else if (mode == "product") {
+                    var proUrl = json.SelectToken("mongodb.product.url").ToString();
+                    var proDBName = json.SelectToken("mongodb.product.db_name").ToString();
+                    _client = new MongoClient(proUrl);
+                    _db = _client.GetDatabase(proDBName);
                 }
 
                 

@@ -52,7 +52,7 @@ namespace mBarber.API
 
     public class SignUpResponse : JsonResponse
     {
-
+        public SignUpRequest data { get; set; }
     }
 
 }
