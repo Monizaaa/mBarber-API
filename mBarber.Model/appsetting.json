@@ -1,0 +1,13 @@
+{
+  "mode": "dev", // product or dev
+  "mongodb": {
+    "dev": {
+      "url": "mongodb://localhost:27017",
+      "db_name": "mbarber_dev"
+    },
+    "product": {
+      "url": "mongodb://localhost:27017",
+      "db_name": "mbarber"
+    }
+  }
+}
